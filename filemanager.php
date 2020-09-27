@@ -19,7 +19,7 @@ $use_highlightjs = true;
 $highlightjs_style = 'vs';
 
 // Default timezone for date() and time() - http://php.net/manual/en/timezones.php
-$default_timezone = 'Europe/Minsk'; // UTC+3
+$default_timezone = 'Asia/Shanghai'; // UTC+3
 
 // Root path for file manager
 $root_path = $_SERVER['DOCUMENT_ROOT'];
@@ -35,7 +35,7 @@ $http_host = $_SERVER['HTTP_HOST'];
 $iconv_input_encoding = 'CP1251';
 
 // date() format for file modification date
-$datetime_format = 'd.m.y H:i';
+$datetime_format = 'yy-m-d H:i';
 
 //--- EDIT BELOW CAREFULLY OR DO NOT EDIT AT ALL
 
