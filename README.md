@@ -1,3 +1,5 @@
+取消使用fm_convert_win函数，解决导致的windows 10 IIS+PHP中文乱码问题。
+
 # PHP File Manager
 
 A good solution for managing files and folders for developers who can't access their site over SSH or FTP.
