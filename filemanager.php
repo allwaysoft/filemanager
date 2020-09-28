@@ -608,7 +608,7 @@ if (isset($_GET['upload'])) {
     ?>
     <div class="path">
         <p><b>Uploading files</b></p>
-        <p class="break-word">Destination folder: <?php echo fm_enc(fm_convert_win(FM_ROOT_PATH . '/' . FM_PATH)) ?></p>
+        <p class="break-word">Destination folder: <?php echo fm_enc(FM_ROOT_PATH . '/' . FM_PATH) ?></p>
         <form action="" method="post" enctype="multipart/form-data">
             <input type="hidden" name="p" value="<?php echo fm_enc(FM_PATH) ?>">
             <input type="hidden" name="upl" value="1">
@@ -652,7 +652,7 @@ if (isset($_POST['copy'])) {
             $copy_files_enc = array_map('fm_enc', $copy_files);
             ?>
             <p class="break-word">Files: <b><?php echo implode('</b>, <b>', $copy_files_enc) ?></b></p>
-            <p class="break-word">Source folder: <?php echo fm_enc(fm_convert_win(FM_ROOT_PATH . '/' . FM_PATH)) ?><br>
+            <p class="break-word">Source folder: <?php echo fm_enc(FM_ROOT_PATH . '/' . FM_PATH) ?><br>
                 <label for="inp_copy_to">Destination folder:</label>
                 <?php echo FM_ROOT_PATH ?>/<input name="copy_to" id="inp_copy_to" value="<?php echo fm_enc(FM_PATH) ?>">
             </p>
@@ -683,8 +683,8 @@ if (isset($_GET['copy']) && !isset($_GET['finish'])) {
     <div class="path">
         <p><b>Copying</b></p>
         <p class="break-word">
-            Source path: <?php echo fm_enc(fm_convert_win(FM_ROOT_PATH . '/' . $copy)) ?><br>
-            Destination folder: <?php echo fm_enc(fm_convert_win(FM_ROOT_PATH . '/' . FM_PATH)) ?>
+            Source path: <?php echo fm_enc(FM_ROOT_PATH . '/' . $copy) ?><br>
+            Destination folder: <?php echo fm_enc(FM_ROOT_PATH . '/' . FM_PATH) ?>
         </p>
         <p>
             <b><a href="?p=<?php echo urlencode(FM_PATH) ?>&amp;copy=<?php echo urlencode($copy) ?>&amp;finish=1"><i class="icon-apply"></i> Copy</a></b> &nbsp;
@@ -701,7 +701,7 @@ if (isset($_GET['copy']) && !isset($_GET['finish'])) {
             }
             foreach ($folders as $f) {
                 ?>
-                <li><a href="?p=<?php echo urlencode(trim(FM_PATH . '/' . $f, '/')) ?>&amp;copy=<?php echo urlencode($copy) ?>"><i class="icon-folder"></i> <?php echo fm_enc(fm_convert_win($f)) ?></a></li>
+                <li><a href="?p=<?php echo urlencode(trim(FM_PATH . '/' . $f, '/')) ?>&amp;copy=<?php echo urlencode($copy) ?>"><i class="icon-folder"></i> <?php echo fm_enc($f) ?></a></li>
             <?php
             }
             ?>
@@ -725,7 +725,7 @@ if (isset($_GET['view'])) {
     fm_show_header(); // HEADER
     fm_show_nav_path(FM_PATH); // current path
 
-    $file_url = FM_ROOT_URL . fm_convert_win((FM_PATH != '' ? '/' . FM_PATH : '') . '/' . $file);
+    $file_url = FM_ROOT_URL . (FM_PATH != '' ? '/' . FM_PATH : '') . '/' . $file;
     $file_path = $path . '/' . $file;
 
     $ext = strtolower(pathinfo($file_path, PATHINFO_EXTENSION));
@@ -762,9 +762,9 @@ if (isset($_GET['view'])) {
 
     ?>
     <div class="path">
-        <p class="break-word"><b><?php echo $view_title ?> "<?php echo fm_enc(fm_convert_win($file)) ?>"</b></p>
+        <p class="break-word"><b><?php echo $view_title ?> "<?php echo fm_enc($file) ?>"</b></p>
         <p class="break-word">
-            Full path: <?php echo fm_enc(fm_convert_win($file_path)) ?><br>
+            Full path: <?php echo fm_enc($file_path) ?><br>
             File size: <?php echo fm_get_filesize($filesize) ?><?php if ($filesize >= 1000): ?> (<?php echo sprintf('%s bytes', $filesize) ?>)<?php endif; ?><br>
             MIME-type: <?php echo $mime_type ?><br>
             <?php
@@ -987,7 +987,7 @@ foreach ($folders as $f) {
     ?>
 <tr>
 <td><label><input type="checkbox" name="file[]" value="<?php echo fm_enc($f) ?>"></label></td>
-<td><div class="filename"><a href="?p=<?php echo urlencode(trim(FM_PATH . '/' . $f, '/')) ?>"><i class="<?php echo $img ?>"></i> <?php echo fm_enc(fm_convert_win($f)) ?></a><?php echo ($is_link ? ' &rarr; <i>' . fm_enc(readlink($path . '/' . $f)) . '</i>' : '') ?></div></td>
+<td><div class="filename"><a href="?p=<?php echo urlencode(trim(FM_PATH . '/' . $f, '/')) ?>"><i class="<?php echo $img ?>"></i> <?php echo fm_enc($f) ?></a><?php echo ($is_link ? ' &rarr; <i>' . fm_enc(readlink($path . '/' . $f)) . '</i>' : '') ?></div></td>
 <td>Folder</td><td><?php echo $modif ?></td>
 <?php if (!FM_IS_WIN): ?>
 <td><a title="Change Permissions" href="?p=<?php echo urlencode(FM_PATH) ?>&amp;chmod=<?php echo urlencode($f) ?>"><?php echo $perms ?></a></td>
@@ -1022,7 +1022,7 @@ foreach ($files as $f) {
     ?>
 <tr>
 <td><label><input type="checkbox" name="file[]" value="<?php echo fm_enc($f) ?>"></label></td>
-<td><div class="filename"><a href="<?php echo fm_enc($filelink) ?>" title="File info"><i class="<?php echo $img ?>"></i> <?php echo fm_enc(fm_convert_win($f)) ?></a><?php echo ($is_link ? ' &rarr; <i>' . fm_enc(readlink($path . '/' . $f)) . '</i>' : '') ?></div></td>
+<td><div class="filename"><a href="<?php echo fm_enc($filelink) ?>" title="File info"><i class="<?php echo $img ?>"></i> <?php echo fm_enc($f) ?></a><?php echo ($is_link ? ' &rarr; <i>' . fm_enc(readlink($path . '/' . $f)) . '</i>' : '') ?></div></td>
 <td><span class="gray" title="<?php printf('%s bytes', $filesize_raw) ?>"><?php echo $filesize ?></span></td>
 <td><?php echo $modif ?></td>
 <?php if (!FM_IS_WIN): ?>
@@ -1676,7 +1676,7 @@ function fm_show_nav_path($path)
             for ($i = 0; $i < $count; $i++) {
                 $parent = trim($parent . '/' . $exploded[$i], '/');
                 $parent_enc = urlencode($parent);
-                $array[] = "<a href='?p={$parent_enc}'>" . fm_enc(fm_convert_win($exploded[$i])) . "</a>";
+                $array[] = "<a href='?p={$parent_enc}'>" . fm_enc($exploded[$i]) . "</a>";
             }
             $root_url .= $sep . implode($sep, $array);
         }
