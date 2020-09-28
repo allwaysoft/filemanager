@@ -1,4 +1,4 @@
-取消使用fm_convert_win函数，解决导致的windows 10 IIS+PHP中文乱码问题。
+取消使用fm_convert_win函数，解决导致的windows 10 IIS+PHP中文乱码问题。基本功能都正常。
 
 # PHP File Manager
 
